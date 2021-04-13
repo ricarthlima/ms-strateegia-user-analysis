@@ -27,5 +27,5 @@ router.register(r'users', views.UserViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('tagcloud/<int:contentId>', views.TagCloudViewSet.as_view(), name=None),
+    path('tagcloud/<str:contentId>', views.TagCloudViewSet.as_view(), name=None),
 ]

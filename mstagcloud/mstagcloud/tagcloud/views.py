@@ -32,26 +32,56 @@ class TagCloudViewSet(APIView):
     #     print("------------------\n" + str(contentId))
     #     return Response({'contentId': contentId})
 
-    def get(self, request, contentId):
+    def clearText(self, text):
+        stopWords = ["\n", "ter", "é"]
+        for sw in stopWords:
+            text = text.replace(sw, "")
+        return text
 
+    def getFromStrateegia(self, contentId):
+        url = "https://api.strateegia.digital/projects/v1/content/" + \
+            str(contentId) + "/comment/report"
+        auth = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycnNsQGNpbi51ZnBlLmJyIiwidWlkIjoiNjAwZjJjY2Y3NGIxMjgwOGMwYzE0Y2YwIiwicm9sZXMiOltdLCJuYW1lIjoiUmljYXJ0aCBSIFMgTGltYSIsImV4cCI6MTYxODMzMDgyNiwiaWF0IjoxNjE4MzE2NDI2fQ.NGvHdLHouh_jPL-XddH5JNV4k-Io0apj9p9zjBbqYdKRQ4zyEvTIqBPFEuqgHNiNzBL8ozFif8SL_FtH6vFxjQ"
+        r = requests.get(
+            url, headers={'content-type': 'application/json', 'Authorization': auth})
+
+        jsonList = json.loads(r.text)
+        text = ""
+
+        for x in range(len(jsonList)):
+            commentList = jsonList[x]["comments"]
+            for y in range(len(commentList)):
+                text = text + commentList[y]["text"] + " "
+
+                repliesList = commentList[y]["replies"]
+                for z in range(len(repliesList)):
+                    text = text + repliesList[z]["text"] + " "
+
+        return self.clearText(text)
+
+    def generateImage(self, text):
         payload = {
             "format": "svg",
             "width": 1000,
             "height": 500,
             "fontFamily": "sans-serif",
             "fontScale": 25,
-            "scale": "linear",
+            "scale": "log",
             "rotation": 1,
-            "maxNumWords": 50,
+            "maxNumWords": 300,
+            "minNumWords": 50,
             "padding": 7,
             "colors": ["#004299", "#1A73E8"],
             "language": "pt",
             "removeStopwords": True,
-            "text": "Não é o crítico que importa; não aquele homem que aponta como o homem forte fraqueja, ou onde aqueles que realizaram algo poderiam tê-lo feito melhor. O crédito pertence ao homem que encontra-se na arena, cuja face está manchada de poeira, suor e sangue; aquele que esforça-se bravamente; que erra, que se depara com um revés após o outro, pois não há esforço sem erros e falhas; aquele que esforça-se para lograr suas ações, que conhece grande entusiasmo, grandes devoções, que se entrega a uma causa nobre; que, no melhor dos casos, conhece no fim o triunfo da realização grandiosa, e que, no pior dos casos, se falhar, ao menos falha ousando grandeza, para que seu lugar jamais seja com aquelas frias e tímidas almas que de de de de de de de de não conhecem vitória ou fracasso."
+            "text": text
         }
-
-        print(payload)
         r = requests.post("https://quickchart.io/wordcloud",
                           data=json.dumps(payload), headers={'content-type': 'application/json'})
 
         return HttpResponse({r.text}, content_type='image/svg+xml')
+
+    def get(self, request, contentId):
+        text = self.getFromStrateegia(contentId)
+        # return HttpResponse(text, content_type='application/json')
+        return self.generateImage(text)
