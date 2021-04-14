@@ -1,3 +1,4 @@
+#!/bin/bash
 FROM python:3.8-buster
 
 RUN apt-get update && apt-get install nginx vim -y --no-install-recommends
@@ -8,7 +9,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 RUN mkdir -p /opt/app
 RUN mkdir -p /opt/app/pip_cache
 RUN mkdir -p /opt/app/mstagcloud
-COPY requirements.txt start-server.sh /opt/app/
+COPY mstagcloud/requirements.txt start-server.sh /opt/app/
 COPY .pip_cache /opt/app/pip_cache/
 COPY mstagcloud /opt/app/mstagcloud/
 WORKDIR /opt/app
