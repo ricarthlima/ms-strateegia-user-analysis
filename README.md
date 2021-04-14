@@ -1,5 +1,6 @@
 # (Docker, Django) Análise dos Usuários do Strateegia
 #### IF1007 - Microsserviços
+**Equipe:** Guilherme Prado, Monalisa Sousa, Ricarth Lima e Warley Souza
 
 ## Screenshots e Screencast
 ``` Ainda não ```
