@@ -40,6 +40,7 @@ Sinta-se a vontade para mandar pull requests, será uma honra para mim! Você po
 ## 🔮 Próximos passos
 
 - Ampliar o entendimento da equipe sobre Docker e Containers;
+- Transformar conceito de usuário influente numa fórmula matemática;
 - Implementar microsserviço dos usuários influentes;
 - Estudar a viabilidade do uso de uma Extensão de Navegador como front-end;
 - Implementar o Front-end;
