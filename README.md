@@ -1,4 +1,4 @@
-# (Docker, Django) Análise dos Usuários do Strateegia
+# (Docker, Django) Análise dos Comentários dos Usuários do Strateegia
 #### IF1007 - Microsserviços
 **Equipe:** Guilherme Prado, Monalisa Sousa, Ricarth Lima e Warley Souza
 
@@ -11,11 +11,11 @@ Esse projeto foi desenvolvido como parte da avaliação da cadeira IF1007 de Mic
 Nosso objetivo é o desenvolvimento de duas features que complementam o uso do sistema [Strateegia](https://app.strateegia.digital/):
 
 - Visualização de uma **Nuvem de Palavras** a nível de Missão, Mapas e Kits;
-- Visualização da os **Usuários Influente** em cada Kit;
+- Visualização dos **Usuários Influentes** em cada Kit;
 
-### O que seria um "Usuário Influente"?
+### Mas o que seria um "Usuário Influente"?
 
-"uma pessoa influente é a que (i) responde as questões e (ii) essa sua resposta motiva diálogo, ou seja, gera comentários (divergências e convergências explícitas) e concordâncias"
+"Um usuário influente é a que (i) responde as questões e (ii) essa sua resposta motiva diálogo, ou seja, gera comentários (divergências e convergências explícitas) e concordâncias"
 (TODO: Transformar isso numa fórmula matemática)
 
 ## 👩‍💻 Tecnologias Usadas
@@ -27,7 +27,7 @@ Nosso objetivo é o desenvolvimento de duas features que complementam o uso do s
 - Quickchart TagCloud API
 - Git e GitHub
 
-## 📲 Instalar o Análise dos Usuários do Strateegia
+## 📲 Instalar o Análise dos Comentários dos Usuários do Strateegia
 ``` Ainda não ```
 
 ## 🔛 Usando esse repositório
@@ -41,7 +41,7 @@ Sinta-se a vontade para mandar pull requests, será uma honra para mim! Você po
 
 - Ampliar o entendimento da equipe sobre Docker e Containers;
 - Implementar microsserviço dos usuários influentes;
-- Estudar a viabilidade do uso de uma Extensão de Navagador como front-end;
+- Estudar a viabilidade do uso de uma Extensão de Navegador como front-end;
 - Implementar o Front-end;
 - Testar o sistema;
 - Publicar!
