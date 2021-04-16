@@ -11,7 +11,18 @@
         "activeTab",
         "tabs",
         "storage",
-        "scripting"
+        "scripting",
+        "background"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://app.strateegia.digital/*"
+            ],
+            "js": [
+                "inject.js"
+            ]
+        }
     ],
     "host_permissions": [
         "https://app.strateegia.digital/"

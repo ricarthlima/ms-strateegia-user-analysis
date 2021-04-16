@@ -1,7 +1,13 @@
 document.getElementById("btnGoToStrateegia").addEventListener("click", goToStrateegia);
 
 window.onload = getURL;
-
+chrome.runtime.onMessage.addListener((message, callback) => {
+    if (message == "runContentScript") {
+        chrome.scripting.executeScript({
+            file: 'inject.js'
+        });
+    }
+});
 
 
 function getURL() {
@@ -15,39 +21,14 @@ function getURL() {
 
             var txtInfos = document.getElementById("infos");
 
-            /* chrome.storage.sync.set({ 'foo': 'hello', 'bar': 'hi' }, function () {
-                console.log('Settings saved');
-            });
 
-            chrome.storage.sync.get(['foo', 'bar'], function (items) {
-                txtInfos.innerHTML = items;
-                console.log(items.bar);
-            }); */
 
-            if (url.includes("content")) {
-                document.getElementById("txtInStrateegia").innerHTML += "\n E estamos com um Kit aberto!";
-                var contentId = url.substr(url.indexOf("content") + 8, url.length - 1);
-                txtInfos.innerHTML += ("\n" + contentId + "\n");
-            }
-            chrome.scripting.executeScript(
-                {
-                    target: { tabId: tabs[0].id, allFrames: true },
-                    function: getTitle,
-                },
-                (injectionResults) => {
-                    for (const frameResult of injectionResults)
-                        txtInfos.innerHTML += frameResult.result;
-                });
         } else {
             document.getElementById("inStrateegia").style.display = "none";
             document.getElementById("notInStrateegia").style.display = "block";
 
         }
     });
-}
-
-function getTitle() {
-    return window.localStorage.getItem("logged_user");
 }
 
 
