@@ -1,0 +1,12 @@
+h1{
+    color: red;
+    text-align: center;
+}
+
+.title-icon{
+    width: 32px;
+    height: 32px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -3,12 +3,28 @@
 
 <head>
     <title>Strateegia User Comments Analysis</title>
-    <script src="popup.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
 </head>
 
-<body>
+<body id="body" style="width: 400px; text-align: center;">
+    <img src="icon-512.png" class="title-icon">
     <h1>Strateegia User Comments Analysis</h1>
-    <button id="checkPage">Check this page now!</button>
+
+    <div id="notInStrateegia">
+        <h4>Não estamos no Strateegia :(</h4>
+        <button id="btnGoToStrateegia">Leve-me até lá</button>
+    </div>
+
+    <div id="inStrateegia">
+        <h4>Estamos no Strateegia!</h4>
+    </div>
+
+    <!-- <br>
+    <i id="url">none</i> -->
+
 </body>
+
+<script src="popup.js"></script>
 
 </html>

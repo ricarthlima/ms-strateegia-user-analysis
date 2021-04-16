@@ -1,20 +1,26 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var checkPageButton = document.getElementById('checkPage');
-    checkPageButton.addEventListener('click', function () {
+document.getElementById("btnGoToStrateegia").addEventListener("click", goToStrateegia);
 
-        chrome.tabs.getSelected(null, function (tab) {
-            d = document;
+window.onload = getURL;
 
-            var f = d.createElement('form');
-            f.action = 'http://gtmetrix.com/analyze.html?bm';
-            f.method = 'post';
-            var i = d.createElement('input');
-            i.type = 'hidden';
-            i.name = 'url';
-            i.value = tab.url;
-            f.appendChild(i);
-            d.body.appendChild(f);
-            f.submit();
-        });
-    }, false);
-}, false);
+
+function getURL() {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+        let url = tabs[0].url;
+
+        if (url.startsWith("https://app.strateegia.digital/")) {
+            document.getElementById("inStrateegia").style.display = "block";
+            document.getElementById("notInStrateegia").style.display = "none";
+        } else {
+            document.getElementById("inStrateegia").style.display = "none";
+            document.getElementById("notInStrateegia").style.display = "block";
+        }
+    });
+}
+
+
+
+function goToStrateegia() {
+    var strateegiaURL = "https://app.strateegia.digital/";
+    chrome.tabs.create({ url: strateegiaURL });
+}
+
