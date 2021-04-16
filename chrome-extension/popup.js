@@ -24,6 +24,11 @@ function getURL() {
                 console.log(items.bar);
             }); */
 
+            if (url.includes("content")) {
+                document.getElementById("txtInStrateegia").innerHTML += "\n E estamos com um Kit aberto!";
+                var contentId = url.substr(url.indexOf("content") + 8, url.length - 1);
+                txtInfos.innerHTML += ("\n" + contentId + "\n");
+            }
             chrome.scripting.executeScript(
                 {
                     target: { tabId: tabs[0].id, allFrames: true },
@@ -31,7 +36,7 @@ function getURL() {
                 },
                 (injectionResults) => {
                     for (const frameResult of injectionResults)
-                        txtInfos.innerHTML = frameResult.result;
+                        txtInfos.innerHTML += frameResult.result;
                 });
         } else {
             document.getElementById("inStrateegia").style.display = "none";
@@ -42,7 +47,6 @@ function getURL() {
 }
 
 function getTitle() {
-    console.log(window.localStorage.getItem("logged_user"));
     return window.localStorage.getItem("logged_user");
 }
 
