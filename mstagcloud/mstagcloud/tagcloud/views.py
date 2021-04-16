@@ -41,7 +41,7 @@ class TagCloudViewSet(APIView):
     def getFromStrateegia(self, contentId):
         url = "https://api.strateegia.digital/projects/v1/content/" + \
             str(contentId) + "/comment/report"
-        auth = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycnNsQGNpbi51ZnBlLmJyIiwidWlkIjoiNjAwZjJjY2Y3NGIxMjgwOGMwYzE0Y2YwIiwicm9sZXMiOltdLCJuYW1lIjoiUmljYXJ0aCBSIFMgTGltYSIsImV4cCI6MTYxODMzMDgyNiwiaWF0IjoxNjE4MzE2NDI2fQ.NGvHdLHouh_jPL-XddH5JNV4k-Io0apj9p9zjBbqYdKRQ4zyEvTIqBPFEuqgHNiNzBL8ozFif8SL_FtH6vFxjQ"
+        auth = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJycnNsQGNpbi51ZnBlLmJyIiwidWlkIjoiNjAwZjJjY2Y3NGIxMjgwOGMwYzE0Y2YwIiwicm9sZXMiOltdLCJuYW1lIjoiUmljYXJ0aCBSIFMgTGltYSIsImV4cCI6MTYxODQ1MTM0NiwiaWF0IjoxNjE4NDM2OTQ2fQ.lCbL8LnSdbPbezERBNGM691T0-FzhWvW649qFmtn8d21j5SJxzBSbbEfkftHmUbVv5uRdrKKq8AZICBfaBKEzw"
         r = requests.get(
             url, headers={'content-type': 'application/json', 'Authorization': auth})
 
