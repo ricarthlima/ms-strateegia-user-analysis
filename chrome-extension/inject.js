@@ -13,6 +13,8 @@ function showTagCloudClicked() {
         console.log(token);
         console.log(url);
         console.log(contentId);
+
+        const myRequest = new Request('http://localhost/api', { method: 'POST', body: '{"foo":"bar"}' });
     }
 }
 
