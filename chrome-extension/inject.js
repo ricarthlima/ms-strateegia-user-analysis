@@ -1,9 +1,22 @@
 var toogleButton = document.createElement("BUTTON");
-toogleButton.textContent = "ShowTagCloud";
-toogleButton.onclick = showTagCloudClicked;
-document.getElementsByClassName("aside-controls")[0].appendChild(toogleButton);
+toogleButton.style.display = "none"
+toogleButton.onclick = tagCloudKit;
+toogleButton.id = "btn-gen-tagcloud-kit"
+document.body.appendChild(toogleButton);
 
-function showTagCloudClicked() {
+var toogleButton = document.createElement("BUTTON");
+toogleButton.style.display = "none"
+toogleButton.onclick = tagCloudMission;
+toogleButton.id = "btn-gen-tagcloud-mission"
+document.body.appendChild(toogleButton);
+
+var toogleButton = document.createElement("BUTTON");
+toogleButton.style.display = "none"
+toogleButton.onclick = tagCloudProject;
+toogleButton.id = "btn-gen-tagcloud-project"
+document.body.appendChild(toogleButton);
+
+function tagCloudKit() {
     var token = window.localStorage.getItem("logged_user");
     var url = window.location.href;
 
@@ -18,10 +31,10 @@ function showTagCloudClicked() {
     }
 }
 
-chrome.runtime.onMessage.addListener((message, callback) => {
-    if (message == "runContentScript") {
-        chrome.scripting.executeScript({
-            file: 'inject.js'
-        });
-    }
-});
+function tagCloudMission() {
+
+}
+
+function tagCloudProject() {
+
+}
