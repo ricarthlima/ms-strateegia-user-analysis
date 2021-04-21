@@ -13,8 +13,8 @@ class TagCloudController < ApplicationController
             responseQuickChart = generateTagCloud(strInfo)
             svg = responseQuickChart.read_body
             render xml: svg, :content_type=>"image/svg+xml"
-        rescue 
-            render json: {"error": "Não foi possível gerar a nuvem de tags."}
+        rescue StandardError => e
+            render json: {"error": e.inspect.to_s,}
         end
         
     end
