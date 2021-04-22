@@ -1,6 +1,8 @@
 window.onload = getURL;
-
 document.getElementById("btnGoToStrateegia").addEventListener("click", goToStrateegia);
+
+var SERVER_URL = "https://ms-strateegia-tagcloud.herokuapp.com/";
+//var SERVER_URL = "http://localhost:3000/";
 
 function getURL() {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
@@ -56,27 +58,6 @@ function showAndHide(toShow, toHide) {
 function makeTagCloudRequest(url, token) {
     var contentId = url.substr(url.indexOf("content") + 8, url.length - 1);
 
-    /*var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + token);
-
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'text/html',
-        },
-
-    };
-
-    fetch("http://localhost:3000/tagcloud/" + contentId, requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error)); */
-    console.log(token.substr(1, token.length - 2));
-    console.log(contentId);
-
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + token.substr(1, token.length - 2));
 
@@ -86,7 +67,7 @@ function makeTagCloudRequest(url, token) {
         redirect: 'follow'
     };
     showAndHide("loader", "divTagCloud");
-    fetch("http://localhost:3000/tagcloud/" + contentId, requestOptions)
+    fetch(SERVER_URL + "tagcloud/" + contentId, requestOptions)
         .then(response => response.text())
         .then(result => showTagCloud(result))
         .catch(error => console.log('error', error));

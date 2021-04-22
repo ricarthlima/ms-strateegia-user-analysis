@@ -8,11 +8,8 @@
         "default_popup": "popup.html"
     },
     "permissions": [
-        "activeTab",
         "tabs",
-        "storage",
-        "scripting",
-        "background"
+        "scripting"
     ],
     "host_permissions": [
         "https://app.strateegia.digital/"
