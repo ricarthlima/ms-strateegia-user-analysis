@@ -14,19 +14,6 @@
         "scripting",
         "background"
     ],
-    "content_scripts": [
-        {
-            "matches": [
-                "https://app.strateegia.digital/*"
-            ],
-            "js": [
-                "inject.js"
-            ],
-            "css": [
-                "inject.css"
-            ]
-        }
-    ],
     "host_permissions": [
         "https://app.strateegia.digital/"
     ]

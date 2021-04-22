@@ -1,37 +1,6 @@
 window.onload = getURL;
-chrome.runtime.onMessage.addListener((message, callback) => {
-    if (message == "runContentScript") {
-        chrome.scripting.executeScript({
-            file: 'inject.js'
-        });
-    }
-});
 
 document.getElementById("btnGoToStrateegia").addEventListener("click", goToStrateegia);
-document.getElementById("btn-kit").addEventListener("click", btnKitClicked);
-document.getElementById("btn-mission").addEventListener("click", btnMissionClicked);
-document.getElementById("btn-project").addEventListener("click", btnProjectClicked);
-
-function btnKitClicked() {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-        let url = tabs[0].url;
-        chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id, allFrames: true },
-            function: function () {
-                document.getElementById("btn-gen-tagcloud-kit").click();
-            },
-        },
-            () => { });
-
-
-    });
-
-}
-
-function btnMissionClicked() { }
-
-function btnProjectClicked() { }
-
 
 function getURL() {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
@@ -39,31 +8,31 @@ function getURL() {
 
 
         if (url.startsWith("https://app.strateegia.digital/")) {
-            document.getElementById("inStrateegia").style.display = "block";
-            document.getElementById("notInStrateegia").style.display = "none";
 
-            if (url.includes("project")) {
-                document.getElementById("openProject").style.display = "block";
-            } else {
-                document.getElementById("openProject").style.display = "none";
-            }
-
-            if (url.includes("mission")) {
-                document.getElementById("openMission").style.display = "block";
-            } else {
-                document.getElementById("openMission").style.display = "none";
-            }
+            // Aparecer div do Strateegia
+            showAndHide("inStrateegia", "notInStrateegia")
 
             if (url.includes("content")) {
-                document.getElementById("openKit").style.display = "block";
+                showAndHide("inContentKit", "notContentKit")
+
+                chrome.scripting.executeScript(
+                    {
+                        target: { tabId: tabs[0].id, allFrames: true },
+                        function: getTokenFromTabLocalStorage,
+                    },
+                    (injectionResults) => {
+                        for (const frameResult of injectionResults)
+                            makeTagCloudRequest(url, frameResult.result);
+                    });
+
+
             } else {
-                document.getElementById("openKit").style.display = "none";
+                showAndHide("notContentKit", "inContentKit")
             }
 
             var txtInfos = document.getElementById("infos");
         } else {
-            document.getElementById("inStrateegia").style.display = "none";
-            document.getElementById("notInStrateegia").style.display = "block";
+            showAndHide("notInStrateegia", "inStrateegia")
             /** Não é aqui! */
         }
     });
@@ -73,5 +42,58 @@ function getURL() {
 function goToStrateegia() {
     var strateegiaURL = "https://app.strateegia.digital/";
     chrome.tabs.create({ url: strateegiaURL });
+}
+
+function getTokenFromTabLocalStorage() {
+    return window.localStorage.getItem("logged_user");
+}
+
+function showAndHide(toShow, toHide) {
+    document.getElementById(toHide).style.display = "none";
+    document.getElementById(toShow).style.display = "block";
+}
+
+function makeTagCloudRequest(url, token) {
+    var contentId = url.substr(url.indexOf("content") + 8, url.length - 1);
+
+    /*var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+        headers: {
+            'Content-type': 'application/json',
+            'Accept': 'text/html',
+        },
+
+    };
+
+    fetch("http://localhost:3000/tagcloud/" + contentId, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error)); */
+    console.log(token.substr(1, token.length - 2));
+    console.log(contentId);
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token.substr(1, token.length - 2));
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+    showAndHide("loader", "divTagCloud");
+    fetch("http://localhost:3000/tagcloud/" + contentId, requestOptions)
+        .then(response => response.text())
+        .then(result => showTagCloud(result))
+        .catch(error => console.log('error', error));
+}
+
+function showTagCloud(result) {
+    document.getElementById("divTagCloud").innerHTML += result
+    showAndHide("divTagCloud", "loader");
 }
 
