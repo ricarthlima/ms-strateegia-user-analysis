@@ -1,0 +1,47 @@
+body{
+    background-color: #1C73E8 !important;
+    border-radius: 10px;
+    width: 750px; 
+    /*height: 1000px;*/
+    text-align: center;
+    font-family: 'Heebo', sans-serif !important;
+    color: white !important;
+    padding: 15px 10px 15px 10px;
+    overflow-x: hidden !important;
+}
+
+h1{
+    text-align: center;
+}
+
+hr{
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.title-icon{
+    width: 48px;
+    height: 48px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-gen{
+    width: 225px;
+    margin-bottom: 5px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#divTagCloud{
+    background-color: white;
+
+    border-radius: 25px;
+    border: 3px solid #D33D50;
+    padding: 10px;
+}

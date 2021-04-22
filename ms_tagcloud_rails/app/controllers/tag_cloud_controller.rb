@@ -7,15 +7,15 @@ class TagCloudController < ApplicationController
         url = "https://api.strateegia.digital/projects/v1/content/" + params[:id] + "/comment/report"
         auth = request.headers["Authorization"]
 
-        begin
-            responseStrateegia = getStrateegiaInfo(url, auth)
-            strInfo = transformJSONToString(responseStrateegia.body)
-            responseQuickChart = generateTagCloud(strInfo)
-            svg = responseQuickChart.read_body
-            render xml: svg, :content_type=>"image/svg+xml"
-        rescue 
-            render json: {"error": "Não foi possível gerar a nuvem de tags."}
-        end
+        #begin
+        responseStrateegia = getStrateegiaInfo(url, auth)
+        strInfo = transformJSONToString(responseStrateegia.body)
+        responseQuickChart = generateTagCloud(strInfo)
+        svg = responseQuickChart.read_body
+        render xml: svg, :content_type=>"image/svg+xml"
+        #rescue StandardError => e
+        #    render json: {"error": e.inspect.to_s,}
+        #end
         
     end
 
@@ -57,8 +57,8 @@ class TagCloudController < ApplicationController
     def generateTagCloud(text)
         payload = {
             "format": "svg",
-            "width": 1000,
-            "height": 500,
+            "width": 700,
+            "height": 400,
             "fontFamily": "sans-serif",
             "fontScale": 25,
             "scale": "log",
