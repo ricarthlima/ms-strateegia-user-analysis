@@ -25,6 +25,12 @@ class InfluentialUsersController < ApplicationController
         # Get Kit Data
         getKitData()
 
+        # Get Score
+        getScore()
+
+        # Sort by score
+        @authors.sort{|a,b| b.score <=> a.score}
+
         # Output render
         render json: {"kit": @kit_data, "authors": @authors}
     end
@@ -70,6 +76,7 @@ class InfluentialUsersController < ApplicationController
                     @authors[author_index].total_agreements += comment["agreements"].length
                     @authors[author_index].bigger_amount_agreements = [comment["agreements"].length,@authors[author_index].bigger_amount_agreements].max
                     @authors[author_index].total_inner_replys += comment["reply_count"]
+                    @authors[author_index].bigger_amout_inner_replys = [comment["reply_count"], @authors[author_index].bigger_amout_inner_replys].max
                     
 
                 else
@@ -81,6 +88,7 @@ class InfluentialUsersController < ApplicationController
                     author.total_agreements = comment["agreements"].length
                     author.bigger_amount_agreements = comment["agreements"].length
                     author.total_inner_replys = comment["reply_count"]
+                    author.bigger_amout_inner_replys = comment["reply_count"]
 
                     @authors.push(author)
 
@@ -120,5 +128,40 @@ class InfluentialUsersController < ApplicationController
             @kit_data.average_inner_replys_per_user += @authors[iterator_author].total_inner_replys
         end
         @kit_data.average_inner_replys_per_user = @kit_data.average_inner_replys_per_user.to_f / @authors.length.to_f
+    end
+
+    def getScore()
+        for iterator_author in 0...@authors.length
+            author = @authors[iterator_author]
+
+            f1 = author.amount_ans_questions.to_f / @kit_data.amount_questions.to_f
+            f2 = [3, (author.amount_comments.to_f / @kit_data.total_comments.to_f) * @kit_data.total_users].min
+
+            f3 = author.total_agreements.to_f / @kit_data.total_agreements.to_f
+            f4 = author.bigger_amount_agreements.to_f / @kit_data.average_agreements_per_comment.to_f
+            if f4 > 5 
+                f4 = 1.25
+            elsif f4 > 3
+                f4 = 1
+            elsif f4 > 1
+                f4 = 0.75
+            else
+                f4 = 0
+            end
+
+            f5 = author.total_inner_replys.to_f / @kit_data.total_replys.to_f
+            f6 = author.bigger_amout_inner_replys.to_f / @kit_data.average_inner_replys_per_user.to_f
+            if f6 > 5 
+                f6 = 1.25
+            elsif f6 > 3
+                f6 = 1
+            elsif f6 > 1
+                f6 = 0.75
+            else
+                f6 = 0
+            end
+
+            @authors[iterator_author].score = (((f1 * 2 + f2)/4) + ((f3*2 + f4)/4 + (f5*2 + f6)/4))/3
+        end
     end
 end
