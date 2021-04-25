@@ -19,6 +19,10 @@ hr{
     margin-bottom: 7px;
 }
 
+/* i{
+    font-size: 0.8em;
+}
+ */
 .title-icon{
     width: 48px;
     height: 48px;
@@ -40,8 +44,57 @@ hr{
 
 #divTagCloud{
     background-color: white;
-
     border-radius: 25px;
     border: 3px solid #D33D50;
     padding: 10px;
+}
+
+#divInfluentialUsers{
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 25px;
+    border: 3px solid #D33D50;
+    padding: 15px;
+    color: black;
+}
+
+.top-score{
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+    color: #D33D50;
+}
+
+.top-infos{
+    border: 3px solid #D33D50;
+    border-radius: 25px;
+    padding: 5px;
+    background-color: #f4f4fa;
+    box-shadow: 4px 6px 5px #8b8b8b;
+    font-size: 0.87em;
+}
+
+.top-title{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.section-name{
+    font-size: 0.8em;
+    color: grey;
+    padding: 7px 5px;
+    border-top: 1px solid #ffa4b0;
+    border-bottom: 1px solid #ffa4b0;
+    margin-bottom: 15px;
+}
+
+#divOthers{
+    font-size: 0.7em;
+    margin-top: 25px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.mb-15{
+    margin-bottom: 15px;
 }

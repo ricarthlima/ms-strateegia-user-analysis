@@ -29,7 +29,7 @@ class InfluentialUsersController < ApplicationController
         getScore()
 
         # Sort by score
-        @authors.sort{|a,b| b.score <=> a.score}
+        @authors.sort{|a,b| a.score.to_i <=> b.score.to_i}
 
         # Output render
         render json: {"kit": @kit_data, "authors": @authors}
@@ -82,7 +82,12 @@ class InfluentialUsersController < ApplicationController
                 else
                     author = Author.new
                     author.id = comment["author"]["id"]
-                    author.name = comment["author"]["name"]
+                    author.name = comment["author"]["name"].split
+                    if author.name.length > 1
+                        author.name = author.name[0] + " " + author.name.last
+                    else
+                        author.name = author.name[0]
+                    end
                     author.amount_ans_questions =  1
                     author.amount_comments = 1
                     author.total_agreements = comment["agreements"].length
@@ -162,6 +167,7 @@ class InfluentialUsersController < ApplicationController
             end
 
             @authors[iterator_author].score = (((f1 * 2 + f2)/4) + ((f3*2 + f4)/4 + (f5*2 + f6)/4))/3
+            @authors[iterator_author].score = (@authors[iterator_author].score * 1000).to_i
         end
     end
 end
