@@ -73,6 +73,7 @@ function makeTagCloudRequest(url, token) {
     };
     showAndHide("loader", "divTagCloud");
     showAndHide("loader", "divInfluentialUsers");
+    showAndHide("loader", "divInfoKit");
     fetch(SERVER_URL + "tagcloud/" + contentId, requestOptions)
         .then(response => response.text())
         .then(result => showTagCloud(result))
@@ -93,7 +94,7 @@ function makeInfluentialUsersRequest(url, token) {
 
     fetch("https://ms-strateegia-influentialusers.herokuapp.com/influential_users/" + contentId, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(showInfluentialUsers(result)))
+        .then(result => showInfluentialUsers(result))
         .catch(error => console.log('error', error));
 }
 
@@ -101,9 +102,11 @@ function showTagCloud(result) {
     document.getElementById("divTagCloud").innerHTML += result;
     showAndHide("divTagCloud", "loader");
     showAndHide("divInfluentialUsers", "loader");
+    showAndHide("divInfoKit", "loader");
 }
 
 function showInfluentialUsers(result) {
+    showKitInformation(result);
     const json = JSON.parse(result);
     var listAuthors = json["authors"]
     listAuthors.sort(function (a, b) {
@@ -136,3 +139,11 @@ function showInfluentialUsers(result) {
     /*  document.getElementById("divInfluentialUsers").innerHTML += result; */
 }
 
+function showKitInformation(result) {
+    const json = JSON.parse(result)["kit"];
+    document.getElementById("kit-questions").innerHTML = json["amount_questions"];
+    document.getElementById("kit-comments").innerHTML = json["total_comments"];
+    document.getElementById("kit-agreements").innerHTML = json["total_agreements"];
+    document.getElementById("kit-replys").innerHTML = json["total_replys"];
+    document.getElementById("kit-users").innerHTML = json["total_users"];
+}
