@@ -23,12 +23,13 @@ hr{
     font-size: 0.8em;
 }
  */
-.title-icon{
-    width: 48px;
-    height: 48px;
+ .title-icon{
+    width: 150px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .btn-gen{
@@ -68,7 +69,7 @@ hr{
 .top-infos{
     border: 3px solid #D33D50;
     border-radius: 25px;
-    padding: 5px;
+    padding: 15px;
     background-color: #f4f4fa;
     box-shadow: 4px 6px 5px #8b8b8b;
     color: black;
@@ -110,7 +111,7 @@ hr{
 }
 
 .div-kit-infos{
-    border: 3px solid #D33D50;
+    border: 1px solid #D33D50;
     border-radius: 10px;
     font-size: 0.8em;
     padding: 15px 0px;
