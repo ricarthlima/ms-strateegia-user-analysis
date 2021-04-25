@@ -91,7 +91,7 @@ function makeInfluentialUsersRequest(url, token) {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:3000/influential_users/" + contentId, requestOptions)
+    fetch("https://ms-strateegia-influentialusers.herokuapp.com/influential_users/" + contentId, requestOptions)
         .then(response => response.text())
         .then(result => console.log(showInfluentialUsers(result)))
         .catch(error => console.log('error', error));
