@@ -1,15 +1,21 @@
 window.onload = getURL;
 document.getElementById("btnGoToStrateegia").addEventListener("click", goToStrateegia);
 
-var SERVER_URL = "https://ms-strateegia-tagcloud.herokuapp.com/";
-//var SERVER_URL = "http://localhost:3000/";
+
+const URL_API_SERVER = "https://strateegiaplus.herokuapp.com/";
+//const URL_API_SERVER = "http://localhost:3000/";
+const URL_STRATEEGIA = "https://app.strateegia.digital/"
+
+const SUBROUTE_TAGCLOUD = "mstagcloud/tagcloud/"
+const SUBROUTE_INFLUENTIAL_USERS = "msinfluentialusers/influential_users/"
+
 
 function getURL() {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
         let url = tabs[0].url;
 
 
-        if (url.startsWith("https://app.strateegia.digital/")) {
+        if (url.startsWith(URL_STRATEEGIA)) {
 
             // Aparecer div do Strateegia
             showAndHide("inStrateegia", "notInStrateegia")
@@ -74,7 +80,7 @@ function makeTagCloudRequest(url, token) {
     showAndHide("loader", "divTagCloud");
     showAndHide("loader", "divInfluentialUsers");
     showAndHide("loader", "divInfoKit");
-    fetch(SERVER_URL + "tagcloud/" + contentId, requestOptions)
+    fetch(URL_API_SERVER + SUBROUTE_TAGCLOUD + contentId, requestOptions)
         .then(response => response.text())
         .then(result => showTagCloud(result))
         .catch(error => console.log('error', error));
@@ -92,7 +98,7 @@ function makeInfluentialUsersRequest(url, token) {
         redirect: 'follow'
     };
 
-    fetch("https://ms-strateegia-influentialusers.herokuapp.com/influential_users/" + contentId, requestOptions)
+    fetch(URL_API_SERVER + SUBROUTE_INFLUENTIAL_USERS + contentId, requestOptions)
         .then(response => response.text())
         .then(result => showInfluentialUsers(result))
         .catch(error => console.log('error', error));
