@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Strateegia User Comments Analysis</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/loader.css">
+    <meta charset="utf-8" />
+
+    <!-- StrateegiM
+        Pa same font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+    <style>
+        .button {
+            border-radius: 6px;
+            background-color: #D20F4F;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+
+<body id="body">
+    <img src="icons/strateegia-plus-logo.png" class="title-icon">
+
+    <!-- <h1>Análise dos Comentários do Strateegia</h1> -->
+    <hr>
+
+    <div id="notInStrateegia">
+        <h4>Não estamos no Strateegia :(</h4>
+        <button class="button" id="btnGoToStrateegia">Leve-me até lá</button>
+    </div>
+
+    <div id="inStrateegia">
+        <!--<h4 id="txtInStrateegia">Estamos no Strateegia!</h4>-->
+        <i id="infos"></i>
+
+        <div id="inContentKit" class="center">
+            <div id="loader">
+                <div class="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div id="divInfoKit" class="top-infos">
+                <div class="section-name">Informações do Kit</div>
+                <div class="row justify-content-around" style="padding: 0px 20px;">
+
+                    <div class="col-2 div-kit-infos align-self-center">
+                        <img src="icons/problem.png" style="width: 28px;">
+                        <div id="kit-questions" class="info-title"></div>
+                        Quantidade de questões
+                    </div>
+
+                    <div class="col-2 div-kit-infos">
+                        <img src="icons/comments.png" style="width: 28px;">
+                        <div id="kit-comments" class="info-title"></div>
+                        Total de comentários
+                    </div>
+
+                    <div class="col-2 div-kit-infos">
+                        <img src="icons/like.png" style="width: 28px;">
+                        <div id="kit-agreements" class="info-title"></div>
+                        Total de concordos
+                    </div>
+
+                    <div class="col-2 div-kit-infos">
+                        <img src="icons/reply-message.png" style="width: 28px;">
+                        <div id="kit-replys" class="info-title"></div>
+                        Total de respostas
+                    </div>
+
+                    <div class="col-2 div-kit-infos">
+                        <img src="icons/group.png" style="width: 28px;">
+                        <div id="kit-users" class="info-title">9</div>
+                        Total de usuários
+                    </div>
+                </div>
+            </div>
+            <div id="divTagCloud" class="mt-15">
+                <div class="section-name">Nuvem de Palavras</div>
+            </div>
+            <div id="divInfluentialUsers" class="mt-15">
+                <div class="section-name">Usuários Influentes</div>
+
+                <div id="divTopThree" class="row justify-content-around">
+                    <div class="col">
+                        <div class="top-infos">
+                            <img src="icons/medal_0.png" style="width: 64px;">
+                            <div class="top-title" id="top-name-0"></div>
+
+                            <div id="top-score-0" class="top-score"></div>
+                            <i id="top-agreement-0"></i> "concordos" recebidos
+                            <br><i id="top-replys-0"></i> respostas geradas
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="top-infos">
+                            <img src="icons/medal_1.png" style="width: 64px;">
+                            <div class="top-title" id="top-name-1"></div>
+
+                            <div id="top-score-1" class="top-score"></div>
+                            <i id="top-agreement-1"></i> "concordos" recebidos
+                            <br><i id="top-replys-1"></i> respostas geradas
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="top-infos">
+                            <img src="icons/medal_2.png" style="width: 64px;">
+                            <div class="top-title" id="top-name-2"></div>
+
+                            <div id="top-score-2" class="top-score"></div>
+                            <i id="top-agreement-2"></i> "concordos" recebidos
+                            <br><i id="top-replys-2"></i> respostas geradas
+                        </div>
+                    </div>
+                </div>
+                <div id="divOthers" class="row align-items-center justify-content-md-around w-100"></div>
+                <center><a
+                        href="https://docs.google.com/document/d/1AOaxrYJFdNVKrmocyh-vdoIDIFI91tU6ZrOTRZFBi-w/edit?usp=sharing"
+                        style="font-size: 0.7em;" target="_blank">Como o score é calculado?</a></center>
+            </div>
+        </div>
+
+        <div id="notContentKit">
+            <h3>Abra um kit e volte aqui.</h3>
+        </div>
+    </div>
+
+    <hr>
+    <div id="infos">
+        <a href="https://strateegia.digital/" target="_blank" style="color: white !important;">Sobre o Strateegia</a> -
+        <a href="https://github.com/ricarthlima/ms-strateegia-user-analysis" target="_blank"
+            style="color: white !important;">Sobra a Extensão</a> - <a href="mailto:rrsl@cin.ufpe.br" target="_blank"
+            style="color: white !important;">Achou algum problema?</a>
+    </div>
+
+</body>
+
+<script src="scripts/popup.js"></script>
+
+</html>

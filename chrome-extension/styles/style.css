@@ -1,0 +1,118 @@
+body{
+    background-color: #1C73E8 !important;
+    border-radius: 10px;
+    width: 750px; 
+    /*height: 1000px;*/
+    text-align: center;
+    font-family: 'Heebo', sans-serif !important;
+    color: white !important;
+    padding: 15px 10px 15px 10px;
+    overflow-x: hidden !important;
+}
+
+h1{
+    text-align: center;
+}
+
+hr{
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+/* i{
+    font-size: 0.8em;
+}
+ */
+ .title-icon{
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.btn-gen{
+    width: 225px;
+    margin-bottom: 5px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#divTagCloud{
+    background-color: white;
+    border-radius: 25px;
+    border: 3px solid #D33D50;
+    padding: 10px;
+}
+
+#divInfluentialUsers{
+    background-color: white;
+    border-radius: 25px;
+    border: 3px solid #D33D50;
+    padding: 15px;
+    color: black;
+}
+
+.top-score{
+    
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+    color: #D33D50;
+}
+
+.top-infos{
+    border: 3px solid #D33D50;
+    border-radius: 25px;
+    padding: 15px;
+    background-color: #f4f4fa;
+    box-shadow: 4px 6px 5px #8b8b8b;
+    color: black;
+}
+
+.top-title{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.section-name{
+    font-size: 0.8em;
+    color: grey;
+    padding: 7px 5px;
+    border-top: 1px solid #ffa4b0;
+    border-bottom: 1px solid #ffa4b0;
+    margin-bottom: 15px;
+}
+
+#divOthers{
+    font-size: 0.7em;
+    margin-top: 25px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.mb-15{
+    margin-bottom: 15px;
+}
+
+.mt-15{
+    margin-top: 15px;
+}
+
+.info-title{
+    font-size: 2.5em;
+    font-weight: bold;
+    color: black;
+}
+
+.div-kit-infos{
+    border: 1px solid #D33D50;
+    border-radius: 10px;
+    font-size: 0.8em;
+    padding: 15px 0px;
+}
