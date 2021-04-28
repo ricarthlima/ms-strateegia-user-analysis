@@ -1,4 +1,5 @@
 # (Rails, MongoDB, Docker) Strateegia+
+
 #### IF1007 - Microsserviços
 **Equipe:** Guilherme Prado, Monalisa Sousa, Ricarth Lima e Warley Souza
 
@@ -13,7 +14,7 @@ Nosso objetivo é o desenvolvimento de duas features que complementam o uso do s
 - Visualização de uma **Nuvem de Palavras** a nível de Kits;
 - Visualização da os **Usuários Influente** em cada Kit;
 
-### O que seria um "Usuário Influente"?
+### Mas o que seria um "Usuário Influente"?
 
 "Uma pessoa influente é a que (i) **responde as questões** e (ii) essa **sua resposta motiva diálogo**, ou seja, gera comentários (divergências e convergências explícitas) e concordâncias"
 
@@ -68,6 +69,7 @@ Sinta-se a vontade para mandar pull requests, será uma honra para mim! Você po
 - Terminar a implementação com Docker Compose;
 - Atualizar a versão enviada para Google Web Store;
 - Refinar a fórmula do Score baseado nos dados coletados;
+
 - Publicar!
 
 Mais na nossa [página de issues.](https://github.com/ricarthlima/ms-strateegia-user-analysis/issues)
