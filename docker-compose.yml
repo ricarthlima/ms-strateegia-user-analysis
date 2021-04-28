@@ -2,6 +2,11 @@ version: "3"
 services:
   web:
     image: nginx
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    depends_on:
+      - api_gateway
     ports:
       - 80:80
 
@@ -27,8 +32,8 @@ services:
       dockerfile: ./api_gateway/Dockerfile
     volumes:
       - ./api_gateway:/api_gateway
-    ports:
-      - 3000:3000
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
     depends_on:
       - mongo
 
@@ -40,6 +45,8 @@ services:
       - ./ms_influential_users_rails:/ms_influential_users_rails
     ports:
       - 3001:3000
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
     depends_on:
       - mongo
 
@@ -51,5 +58,7 @@ services:
       - ./ms_tagcloud_rails:/ms_tagcloud_rails
     ports:
       - 3002:3000
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
     depends_on:
       - mongo
