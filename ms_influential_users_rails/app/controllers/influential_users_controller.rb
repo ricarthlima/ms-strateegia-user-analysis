@@ -167,7 +167,7 @@ class InfluentialUsersController < ApplicationController
             end
 
             @authors[iterator_author].score = (((f1 * 2 + f2)/4) + ((f3*2 + f4)/4 + (f5*2 + f6)/4))/3
-            @authors[iterator_author].score = @authors[iterator_author].score * 1000
+            @authors[iterator_author].score = (@authors[iterator_author].score * 1000).to_i
         end
     end
 end
