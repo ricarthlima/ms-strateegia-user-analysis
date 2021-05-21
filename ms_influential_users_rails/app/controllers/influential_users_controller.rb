@@ -133,10 +133,24 @@ class InfluentialUsersController < ApplicationController
             @kit_data.average_inner_replys_per_user += @authors[iterator_author].total_inner_replys
         end
         @kit_data.average_inner_replys_per_user = @kit_data.average_inner_replys_per_user.to_f / @authors.length.to_f
+        
+        @kit_data.amount_questions = [1,@kit_data.amount_questions ].max 
+        @kit_data.total_comments = [1,@kit_data.total_comments].max 
+        @kit_data.total_agreements = [1,@kit_data.total_agreements].max 
+        @kit_data.total_replys = [1,@kit_data.total_replys].max 
+        @kit_data.total_users = [1,@kit_data.total_users].max 
+
+        if @kit_data.average_agreements_per_comment == 0
+            @kit_data.average_agreements_per_comment = 0.0000001
+        end
+
+        if @kit_data.average_inner_replys_per_user == 0
+            @kit_data.average_inner_replys_per_user = 0.0000001
+        end      
     end
 
     def getScore()
-        for iterator_author in 0...@authors.length
+        for iterator_author in 0...@authors.length            
             author = @authors[iterator_author]
 
             f1 = author.amount_ans_questions.to_f / @kit_data.amount_questions.to_f
@@ -144,11 +158,12 @@ class InfluentialUsersController < ApplicationController
 
             f3 = author.total_agreements.to_f / @kit_data.total_agreements.to_f
             f4 = author.bigger_amount_agreements.to_f / @kit_data.average_agreements_per_comment.to_f
-            if f4 > 5 
+
+            if (f4 > 5) then 
                 f4 = 1.25
-            elsif f4 > 3
+            elsif (f4 > 3) then
                 f4 = 1
-            elsif f4 > 1
+            elsif (f4 > 1) then
                 f4 = 0.75
             else
                 f4 = 0
@@ -156,6 +171,7 @@ class InfluentialUsersController < ApplicationController
 
             f5 = author.total_inner_replys.to_f / @kit_data.total_replys.to_f
             f6 = author.bigger_amout_inner_replys.to_f / @kit_data.average_inner_replys_per_user.to_f
+
             if f6 > 5 
                 f6 = 1.25
             elsif f6 > 3
